@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { TextField, Button, Paper, Typography, Grow } from '@material-ui/core';
+import {
+  TextField,
+  Button,
+  Paper,
+  Typography,
+  Grow,
+  Box,
+  Grid,
+} from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 import { createFoodPost, updateFoodPost } from '../../actions/foodPosts';
@@ -57,9 +65,10 @@ const Form = ({ currentId, setCurrentId }) => {
           noValidate
           onSubmit={submitHandler}
         >
-          <Typography variant='h6'>
+          <Typography variant='h6' className={classes.formTitle}>
             {currentId ? 'Editing my' : 'Create a'} Food Post
           </Typography>
+          <Box sx={{ m: 3 }} />
           <TextField
             name='author'
             variant='outlined'
@@ -70,6 +79,7 @@ const Form = ({ currentId, setCurrentId }) => {
               setFoodPostData({ ...foodPostData, author: e.target.value })
             }
           />
+          <Box sx={{ m: 3 }} />
           <TextField
             name='title'
             variant='outlined'
@@ -80,6 +90,7 @@ const Form = ({ currentId, setCurrentId }) => {
               setFoodPostData({ ...foodPostData, title: e.target.value })
             }
           />
+          <Box sx={{ m: 3 }} />
           <TextField
             name='description'
             variant='outlined'
@@ -90,6 +101,7 @@ const Form = ({ currentId, setCurrentId }) => {
               setFoodPostData({ ...foodPostData, description: e.target.value })
             }
           />
+          <Box sx={{ m: 3 }} />
           <TextField
             name='tags'
             variant='outlined'
@@ -97,9 +109,13 @@ const Form = ({ currentId, setCurrentId }) => {
             fullWidth
             value={foodPostData.tags}
             onChange={(e) =>
-              setFoodPostData({ ...foodPostData, tags: e.target.value })
+              setFoodPostData({
+                ...foodPostData,
+                tags: e.target.value.split(','),
+              })
             }
           />
+          <Box sx={{ m: 3 }} />
           <div className={classes.file}>
             <FileBase
               type='file'
@@ -109,22 +125,16 @@ const Form = ({ currentId, setCurrentId }) => {
               }
             />
           </div>
-          <Button
-            variant='contained'
-            color='secondary'
-            size='large'
-            type='submit'
-          >
-            Submit
-          </Button>
-          <Button
-            variant='contained'
-            color='secondary'
-            size='large'
-            onClick={clearHandler}
-          >
-            Clear
-          </Button>
+          <Grid container justify='flex-end'>
+            <Button
+              variant='contained'
+              color='secondary'
+              size='large'
+              type='submit'
+            >
+              Submit
+            </Button>
+          </Grid>
         </form>
       </Paper>
     </Grow>

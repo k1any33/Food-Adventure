@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { Grid, CircularProgress } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import FoodPost from './FoodPost/FoodPost';
 
 const FoodPosts = ({ setCurrentId }) => {
@@ -9,7 +9,7 @@ const FoodPosts = ({ setCurrentId }) => {
   console.log(foodPosts);
 
   return !foodPosts.length ? (
-    'There are no posts available'
+    'There are no posts'
   ) : (
     <Grid
       // className={classes.container}

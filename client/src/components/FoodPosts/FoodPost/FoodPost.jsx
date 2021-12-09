@@ -78,7 +78,8 @@ const FoodPost = ({ foodPost, setCurrentId }) => {
         >
           <FavoriteBorderIcon />
         </Button>
-        {foodPost.likeCount} Likes
+
+        <Typography variant='body1'>{foodPost.likeCount} </Typography>
       </CardActions>
     </Card>
   );
