@@ -8,12 +8,15 @@ import {
   Typography,
 } from '@material-ui/core';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import CreateIcon from '@material-ui/icons/Create';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
 import useStyles from './FoodPostStyles';
 
-const FoodPost = ({ foodPost }) => {
+const FoodPost = ({ foodPost, setCurrentId }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -21,11 +24,22 @@ const FoodPost = ({ foodPost }) => {
         image={foodPost.selectedFile}
         title={foodPost.title}
       />
-      <div className={classes.overlay}>
+      <div className={classes.leftOverlay}>
         <Typography variant='h6'>{foodPost.author}</Typography>
         <Typography variant='body2'>
           {moment(foodPost.createdAt).fromNow()}
         </Typography>
+      </div>
+      <div className={classes.rightOverlay}>
+        <Button
+          className={classes.button}
+          onClick={() => {
+            navigate('add-post');
+            setCurrentId(foodPost._id);
+          }}
+        >
+          <CreateIcon />
+        </Button>
       </div>
       <Typography
         className={classes.title}

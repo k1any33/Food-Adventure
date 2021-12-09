@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -23,11 +23,12 @@ const theme = createTheme({
 });
 
 function App() {
+  const [currentId, setCurrentId] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getFoodPosts());
-  }, [dispatch]);
+  }, [dispatch, currentId]);
 
   return (
     <BrowserRouter>
@@ -35,8 +36,11 @@ function App() {
         <CssBaseline />
         <NavBar />
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/add-post' element={<Form />} />
+          <Route path='/' element={<Home setCurrentId={setCurrentId} />} />
+          <Route
+            path='/add-post'
+            element={<Form currentId={currentId} setCurrentId={setCurrentId} />}
+          />
         </Routes>
       </MuiThemeProvider>
     </BrowserRouter>

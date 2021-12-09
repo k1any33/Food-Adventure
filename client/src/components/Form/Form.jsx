@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { TextField, Button, Paper, Typography, Grow } from '@material-ui/core';
 import FileBase from 'react-file-base64';
-import { useDispatch } from 'react-redux';
-import { createFoodPost } from '../../actions/foodPosts';
+import { useDispatch, useSelector } from 'react-redux';
+import { createFoodPost, updateFoodPost } from '../../actions/foodPosts';
 
 import useStyles from './FormStyles';
 
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
   const [foodPostData, setFoodPostData] = useState({
     author: '',
     title: '',
@@ -15,18 +16,38 @@ const Form = () => {
     tags: '',
     selectedFile: '',
   });
+  const foodPost = useSelector((state) =>
+    currentId ? state.foodPosts.find((post) => post._id === currentId) : null
+  );
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (foodPost) setFoodPostData(foodPost);
+  }, [foodPost]);
+
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('submitted');
-    // rmb to call the function createFoodPost() and not createFoodPost
-    dispatch(createFoodPost(foodPostData));
+    if (currentId) {
+      dispatch(updateFoodPost(currentId, foodPostData));
+    } else {
+      // rmb to call the function createFoodPost() and not createFoodPost
+      dispatch(createFoodPost(foodPostData));
+    }
+    clearHandler();
     navigate('/');
   };
-  const clearHandler = () => {};
+  const clearHandler = () => {
+    setCurrentId(null);
+    setFoodPostData({
+      author: '',
+      title: '',
+      description: '',
+      tags: '',
+      selectedFile: '',
+    });
+  };
   return (
     <Grow in>
       <Paper className={classes.paper}>
@@ -36,7 +57,9 @@ const Form = () => {
           noValidate
           onSubmit={submitHandler}
         >
-          <Typography variant='h6'>Create a Food Post</Typography>
+          <Typography variant='h6'>
+            {currentId ? 'Editing my' : 'Create a'} Food Post
+          </Typography>
           <TextField
             name='author'
             variant='outlined'

@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import FoodPost from '../models/food-posts-model.js';
 
 // Named exports
@@ -22,4 +23,22 @@ export const createFoodPosts = async (req, res) => {
   } catch (error) {
     res.status(409).json({ message: error.message });
   }
+};
+
+// /food-posts/1 <-- id is 1
+export const updateFoodPost = async (req, res) => {
+  const { id: _id } = req.params;
+  const foodPost = req.body;
+  if (!mongoose.Types.ObjectId.isValid(_id))
+    return res.status(404).send('No Food Post with that ID!');
+
+  const updatedFoodPost = await FoodPost.findByIdAndUpdate(
+    _id,
+    { ...foodPost, _id },
+    {
+      new: true,
+    }
+  );
+
+  res.json(updatedFoodPost);
 };

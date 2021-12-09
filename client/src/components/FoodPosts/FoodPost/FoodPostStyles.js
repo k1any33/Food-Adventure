@@ -14,10 +14,18 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     backgroundBlendMode: 'darken',
   },
-  overlay: {
+  leftOverlay: {
     position: 'absolute',
     top: '15px',
     left: '15px',
+    color: 'white',
+  },
+  rightOverlay: {
+    position: 'absolute',
+    top: '15px',
+    right: '15px',
+  },
+  button: {
     color: 'white',
   },
   title: {

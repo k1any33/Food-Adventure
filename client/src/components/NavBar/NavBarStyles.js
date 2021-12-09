@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     background: '#FFD0D7',
     color: '#000000',
+    margin: '0 0 40px 0',
   },
   title: {
     fontWeight: 'Bold',
