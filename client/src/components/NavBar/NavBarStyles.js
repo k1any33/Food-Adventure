@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'Bold',
     fontSize: 23,
   },
+  link: {
+    textDecoration: 'none',
+    color: 'inherit',
+  },
   icons: {
     margin: '5px 0',
     padding: '10px 30px',
