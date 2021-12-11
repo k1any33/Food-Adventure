@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Paper,
@@ -8,21 +8,45 @@ import {
   Button,
   Box,
 } from '@material-ui/core';
+import { GoogleLogIn } from 'react-google-login';
 import useStyles from './AuthStyles';
 import AuthInput from './AuthInput';
+import { useDispatch } from 'react-redux';
+import { login, register } from '../../actions/auth';
+
+const initialState = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
 
 const Auth = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const classes = useStyles();
+  const [userData, setUserData] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
 
-  const submitHandler = () => {};
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(userData);
+    if (isSignUp) {
+      dispatch(register(userData, navigate));
+    } else {
+      dispatch(login(userData, navigate));
+    }
+  };
   const showPasswordHandler = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
-  const valueChangeHandler = () => {};
+  const valueChangeHandler = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
   const switchAuthPage = () => {
     setIsSignUp((prevIsSignUp) => !prevIsSignUp);
-    showPasswordHandler(false);
+    setShowPassword(false);
   };
   return (
     <Container maxWidth='xs'>
@@ -81,6 +105,18 @@ const Auth = () => {
             >
               {isSignUp ? 'Sign Up' : 'Log In'}
             </Button>
+            {/* <GoogleLogIn
+              clientId='GOOGLE ID'
+              render={(renderProps) => (
+                <Button
+                  fullWidth
+                  onClick={renderProps.onClick}
+                  variant='contained'
+                >
+                  Google Sign In
+                </Button>
+              )}
+            /> */}
           </Grid>
         </form>
         <Button className={classes.paperButton} onClick={switchAuthPage}>

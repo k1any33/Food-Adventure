@@ -7,13 +7,14 @@ import {
   likeFoodPost,
 } from '../controllers/food-posts-controller.js';
 
+import auth from '../middleware/auth.js';
+
 const router = express.Router();
 
 router.get('/', getFoodPosts);
-router.post('/', createFoodPosts);
-router.patch('/:id', updateFoodPost);
-router.delete('/:id', deleteFoodPost);
-
-router.patch('/:id/likeFoodPost', likeFoodPost);
+router.post('/', auth, createFoodPosts);
+router.patch('/:id', auth, updateFoodPost);
+router.delete('/:id', auth, deleteFoodPost);
+router.patch('/:id/likeFoodPost', auth, likeFoodPost);
 
 export default router;

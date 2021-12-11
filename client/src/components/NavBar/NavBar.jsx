@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { LOGOUT } from '../../constants/actionTypes';
+import { useDispatch } from 'react-redux';
 import {
   AppBar,
   Toolbar,
@@ -18,7 +19,24 @@ import foodIcon from '../../assets/foodIcon.png';
 
 const NavBar = () => {
   const classes = useStyles();
-  const user = null;
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    dispatch({ type: LOGOUT });
+    navigate('/');
+    setUser(null);
+  };
+
+  useEffect(() => {
+    const token = user?.token;
+
+    // JWT
+
+    setUser(JSON.parse(localStorage.getItem('user')));
+  }, [location]);
   return (
     <AppBar className={classes.appBar} position='static'>
       <div>
@@ -46,6 +64,7 @@ const NavBar = () => {
           </Avatar>
           <Typography variant='h6'>{user.result.name}</Typography>
           <Button
+            onClick={logout}
             className={classes.button}
             variant='contained'
             color='secondary'

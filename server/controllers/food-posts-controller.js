@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import FoodPost from '../models/food-posts-model.js';
+import FoodPost from '../models/foodPostModel.js';
 
 // Named exports
 export const getFoodPosts = async (req, res) => {
@@ -55,17 +55,26 @@ export const deleteFoodPost = async (req, res) => {
 export const likeFoodPost = async (req, res) => {
   const { id } = req.params;
 
+  if (!req.userId) return res.json({ message: 'Unauthenticated' });
+
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send('No Food Post with that ID!');
 
   const foodPost = await FoodPost.findById(id);
-  const updatedFoodPost = await FoodPost.findByIdAndUpdate(
-    id,
-    {
-      likeCount: foodPost.likeCount + 1,
-    },
-    { new: true }
-  );
+
+  const index = foodPost.likes.findIndex((id) => id == String(req.userId));
+
+  if (index == -1) {
+    // like
+    foodPost.likes.push(req.userId);
+  } else {
+    //dislike
+    foodPost.likes = foodPost.likes.filter((id) => id != String(req.userId));
+  }
+
+  const updatedFoodPost = await FoodPost.findByIdAndUpdate(id, foodPost, {
+    new: true,
+  });
 
   res.json(updatedFoodPost);
 };

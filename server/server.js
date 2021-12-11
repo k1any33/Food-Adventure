@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-import foodPostRoutes from './routes/food-post-routes.js';
+import foodPostRoutes from './routes/food-posts-routes.js';
+import userRoutes from './routes/user-routes.js';
 
 const app = express();
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
 
 app.use('/food-posts', foodPostRoutes);
+app.use('/user', userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
