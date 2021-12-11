@@ -9,6 +9,7 @@ import {
   Grow,
   Box,
   Grid,
+  Container,
 } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
@@ -58,85 +59,90 @@ const Form = ({ currentId, setCurrentId }) => {
   };
   return (
     <Grow in>
-      <Paper className={classes.paper}>
-        <form
-          classes={classes.form}
-          autoComplete='off'
-          noValidate
-          onSubmit={submitHandler}
-        >
-          <Typography variant='h6' className={classes.formTitle}>
-            {currentId ? 'Editing my' : 'Create a'} Food Post
-          </Typography>
-          <Box sx={{ m: 3 }} />
-          <TextField
-            name='author'
-            variant='outlined'
-            label='Author'
-            fullWidth
-            value={foodPostData.author}
-            onChange={(e) =>
-              setFoodPostData({ ...foodPostData, author: e.target.value })
-            }
-          />
-          <Box sx={{ m: 3 }} />
-          <TextField
-            name='title'
-            variant='outlined'
-            label='Title'
-            fullWidth
-            value={foodPostData.title}
-            onChange={(e) =>
-              setFoodPostData({ ...foodPostData, title: e.target.value })
-            }
-          />
-          <Box sx={{ m: 3 }} />
-          <TextField
-            name='description'
-            variant='outlined'
-            label='Description'
-            fullWidth
-            value={foodPostData.description}
-            onChange={(e) =>
-              setFoodPostData({ ...foodPostData, description: e.target.value })
-            }
-          />
-          <Box sx={{ m: 3 }} />
-          <TextField
-            name='tags'
-            variant='outlined'
-            label='Tags'
-            fullWidth
-            value={foodPostData.tags}
-            onChange={(e) =>
-              setFoodPostData({
-                ...foodPostData,
-                tags: e.target.value.split(','),
-              })
-            }
-          />
-          <Box sx={{ m: 3 }} />
-          <div className={classes.file}>
-            <FileBase
-              type='file'
-              multiple={false}
-              onDone={({ base64 }) =>
-                setFoodPostData({ ...foodPostData, selectedFile: base64 })
+      <Container maxWidth='xs'>
+        <Paper className={classes.paper}>
+          <form
+            classes={classes.form}
+            autoComplete='off'
+            noValidate
+            onSubmit={submitHandler}
+          >
+            <Typography variant='h6' className={classes.formTitle}>
+              {currentId ? 'Editing my' : 'Create a'} Food Post
+            </Typography>
+            <Box sx={{ m: 3 }} />
+            <TextField
+              name='author'
+              variant='outlined'
+              label='Author'
+              fullWidth
+              value={foodPostData.author}
+              onChange={(e) =>
+                setFoodPostData({ ...foodPostData, author: e.target.value })
               }
             />
-          </div>
-          <Grid container justify='flex-end'>
-            <Button
-              variant='contained'
-              color='secondary'
-              size='large'
-              type='submit'
-            >
-              Submit
-            </Button>
-          </Grid>
-        </form>
-      </Paper>
+            <Box sx={{ m: 3 }} />
+            <TextField
+              name='title'
+              variant='outlined'
+              label='Title'
+              fullWidth
+              value={foodPostData.title}
+              onChange={(e) =>
+                setFoodPostData({ ...foodPostData, title: e.target.value })
+              }
+            />
+            <Box sx={{ m: 3 }} />
+            <TextField
+              name='description'
+              variant='outlined'
+              label='Description'
+              fullWidth
+              value={foodPostData.description}
+              onChange={(e) =>
+                setFoodPostData({
+                  ...foodPostData,
+                  description: e.target.value,
+                })
+              }
+            />
+            <Box sx={{ m: 3 }} />
+            <TextField
+              name='tags'
+              variant='outlined'
+              label='Tags'
+              fullWidth
+              value={foodPostData.tags}
+              onChange={(e) =>
+                setFoodPostData({
+                  ...foodPostData,
+                  tags: e.target.value.split(','),
+                })
+              }
+            />
+            <Box sx={{ m: 3 }} />
+            <div className={classes.file}>
+              <FileBase
+                type='file'
+                multiple={false}
+                onDone={({ base64 }) =>
+                  setFoodPostData({ ...foodPostData, selectedFile: base64 })
+                }
+              />
+            </div>
+            <Grid container justify='flex-end'>
+              <Button
+                variant='contained'
+                color='secondary'
+                size='large'
+                type='submit'
+              >
+                Submit
+              </Button>
+            </Grid>
+          </form>
+        </Paper>
+      </Container>
     </Grow>
   );
 };

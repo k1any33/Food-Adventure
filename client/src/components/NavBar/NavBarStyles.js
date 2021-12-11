@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     justifyContent: 'center',
-    margin: '0 15px',
+    margin: '0 40px',
   },
   // imageIcon: {
   //   display: 'flex',

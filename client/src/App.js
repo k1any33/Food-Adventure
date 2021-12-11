@@ -10,6 +10,7 @@ import { getFoodPosts } from './actions/foodPosts';
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home';
 import Form from './components/Form/Form';
+import Auth from './components/Auth/Auth';
 
 const theme = createTheme({
   palette: {
@@ -41,6 +42,7 @@ function App() {
             path='/add-post'
             element={<Form currentId={currentId} setCurrentId={setCurrentId} />}
           />
+          <Route path='/auth' element={<Auth />} />
         </Routes>
       </MuiThemeProvider>
     </BrowserRouter>
