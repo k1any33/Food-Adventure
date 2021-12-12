@@ -129,7 +129,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 }
               />
             </div>
-            <Grid container justify='flex-end'>
+            <Grid container justifyContent='flex-end'>
               <Button
                 variant='contained'
                 color='secondary'
