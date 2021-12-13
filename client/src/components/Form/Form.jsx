@@ -39,7 +39,12 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
     console.log(foodPostData);
     if (currentId) {
-      dispatch(updateFoodPost({ ...foodPostData, name: user?.newUser?.name }));
+      dispatch(
+        updateFoodPost(currentId, {
+          ...foodPostData,
+          name: user?.newUser?.name,
+        })
+      );
     } else {
       // rmb to call the function createFoodPost() and not createFoodPost
       dispatch(createFoodPost({ ...foodPostData, name: user?.newUser?.name }));

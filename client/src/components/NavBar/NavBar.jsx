@@ -31,12 +31,9 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    // const token = user?.token;
-
-    // JWT
-
     setUser(JSON.parse(localStorage.getItem('user')));
   }, [location]);
+
   return (
     <AppBar className={classes.appBar} position='static'>
       <div>
@@ -49,21 +46,21 @@ const NavBar = () => {
         </Link>
       </div>
       {user ? (
-        <div className={classes.icons}>
+        <div className={classes.navBarRight}>
           <Link to='/add-post' className={classes.link}>
             <AddIcon className={classes.icon} />
           </Link>
           <SearchIcon className={classes.icon} />
           <FavoriteBorderIcon className={classes.icon} />
-          <Avatar
-            className={classes.avatar}
-            alt={user.newUser.name}
-            src={user.newUser.imageUrl}
-          >
-            {user.newUser.name.charAt(0)}
-          </Avatar>
+          <div className={classes.profile}>
+            <Avatar alt={user.newUser.name} src={user.newUser.imageUrl}>
+              {user.newUser.name.charAt(0)}
+            </Avatar>
+            <Typography variant='h6' className={classes.name}>
+              {user.newUser.name}
+            </Typography>
+          </div>
 
-          <Typography variant='h6'>{user.newUser.name}</Typography>
           <Button
             onClick={logout}
             className={classes.button}

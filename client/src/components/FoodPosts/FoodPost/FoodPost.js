@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import CreateIcon from '@material-ui/icons/Create';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
@@ -21,6 +22,36 @@ const FoodPost = ({ foodPost, setCurrentId }) => {
   const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  const Likes = () => {
+    if (foodPost.likes.length > 0) {
+      return foodPost.likes.find((like) => like === user?.newUser?._id) ? (
+        <div className={classes.align}>
+          <FavoriteIcon fontSize='small' />
+          &nbsp;
+          {foodPost.likes.length > 2
+            ? `You and ${foodPost.likes.length - 1} others`
+            : `${foodPost.likes.length} like${
+                foodPost.likes.length > 1 ? 's' : ''
+              }`}
+        </div>
+      ) : (
+        <div className={classes.align}>
+          <FavoriteBorderIcon fontSize='small' />
+          &nbsp;{foodPost.likes.length}{' '}
+          {foodPost.likes.length === 1 ? 'Like' : 'Likes'}
+        </div>
+      );
+    }
+
+    return (
+      <div className={classes.align}>
+        <FavoriteIcon fontSize='small' />
+        &nbsp;Like
+      </div>
+    );
+  };
 
   return (
     <Card className={classes.card}>
@@ -30,29 +61,31 @@ const FoodPost = ({ foodPost, setCurrentId }) => {
         title={foodPost.title}
       />
       <div className={classes.leftOverlay}>
-        <Typography variant='h6'>{foodPost.author}</Typography>
+        <Typography variant='h6'>{foodPost.name}</Typography>
         <Typography variant='body2'>
           {moment(foodPost.createdAt).fromNow()}
         </Typography>
       </div>
-      <div className={classes.rightOverlay}>
-        <Button
-          className={classes.button}
-          onClick={() => {
-            navigate('add-post');
-            setCurrentId(foodPost._id);
-          }}
-        >
-          <CreateIcon />
-        </Button>
+      {user?.newUser?._id === foodPost?.author && (
+        <div className={classes.rightOverlay}>
+          <Button
+            className={classes.button}
+            onClick={() => {
+              navigate('add-post');
+              setCurrentId(foodPost._id);
+            }}
+          >
+            <CreateIcon />
+          </Button>
+          <Button
+            className={classes.button}
+            onClick={() => dispatch(deleteFoodPost(foodPost._id))}
+          >
+            <DeleteIcon />
+          </Button>
+        </div>
+      )}
 
-        <Button
-          className={classes.button}
-          onClick={() => dispatch(deleteFoodPost(foodPost._id))}
-        >
-          <DeleteIcon />
-        </Button>
-      </div>
       <Typography
         className={classes.title}
         gutterBottom
@@ -74,11 +107,11 @@ const FoodPost = ({ foodPost, setCurrentId }) => {
       <CardActions>
         <Button
           className={classes.favButton}
+          disabled={!user?.newUser}
           onClick={() => dispatch(likeFoodPost(foodPost._id))}
         >
-          <FavoriteBorderIcon />
+          <Likes />
         </Button>
-        {foodPost.likeCount} Likes
       </CardActions>
     </Card>
   );

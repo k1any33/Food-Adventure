@@ -32,8 +32,6 @@ const useStyles = makeStyles((theme) => ({
   },
   favButton: {
     color: 'black',
-    minHeight: 0,
-    minWidth: 0,
   },
   title: {
     padding: '10px 15px 0 15px',
@@ -42,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     padding: '2px 15px',
+  },
+  align: {
+    display: 'flex',
+    alignItems: 'center',
+    flexWrap: 'wrap',
   },
 }));
 
