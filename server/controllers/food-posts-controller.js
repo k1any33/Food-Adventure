@@ -14,7 +14,11 @@ export const getFoodPosts = async (req, res) => {
 export const createFoodPosts = async (req, res) => {
   const foodPost = req.body;
 
-  const newFoodPost = new FoodPost(foodPost);
+  const newFoodPost = new FoodPost({
+    ...foodPost,
+    author: req.userId,
+    createdAt: new Date().toISOString(),
+  });
 
   try {
     await newFoodPost.save();
@@ -64,7 +68,7 @@ export const likeFoodPost = async (req, res) => {
 
   const index = foodPost.likes.findIndex((id) => id == String(req.userId));
 
-  if (index == -1) {
+  if (index === -1) {
     // like
     foodPost.likes.push(req.userId);
   } else {

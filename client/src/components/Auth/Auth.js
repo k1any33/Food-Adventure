@@ -8,7 +8,7 @@ import {
   Button,
   Box,
 } from '@material-ui/core';
-import { GoogleLogIn } from 'react-google-login';
+// import { GoogleLogIn } from 'react-google-login';
 import useStyles from './AuthStyles';
 import AuthInput from './AuthInput';
 import { useDispatch } from 'react-redux';

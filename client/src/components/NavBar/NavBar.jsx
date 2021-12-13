@@ -31,7 +31,7 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    const token = user?.token;
+    // const token = user?.token;
 
     // JWT
 
@@ -57,12 +57,13 @@ const NavBar = () => {
           <FavoriteBorderIcon className={classes.icon} />
           <Avatar
             className={classes.avatar}
-            alt={user.result.name}
-            src={user.result.imageUrl}
+            alt={user.newUser.name}
+            src={user.newUser.imageUrl}
           >
-            {user.result.name.charAt(0)}
+            {user.newUser.name.charAt(0)}
           </Avatar>
-          <Typography variant='h6'>{user.result.name}</Typography>
+
+          <Typography variant='h6'>{user.newUser.name}</Typography>
           <Button
             onClick={logout}
             className={classes.button}

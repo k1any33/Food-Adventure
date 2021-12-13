@@ -2,6 +2,14 @@ import axios from 'axios';
 
 const API = axios.create({ baseURL: 'http://localhost:5000' });
 
+// Send our token to the backend middelware to verify the user
+axios.interceptors.request.use((req) => {
+  const token = `Bearer ${JSON.parse(localStorage.getItem('user')).token}`;
+  req.headers.Authorization = token;
+
+  return req;
+});
+
 export const fetchFoodPosts = () => axios.get('/food-posts');
 export const createFoodPost = (newFoodPost) =>
   axios.post('/food-posts', newFoodPost);

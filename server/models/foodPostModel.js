@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const foodPostSchema = mongoose.Schema({
   title: String,
   description: String,
+  name: String,
   author: String,
   tags: [String],
   selectedFile: String,

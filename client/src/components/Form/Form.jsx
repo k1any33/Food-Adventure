@@ -18,7 +18,6 @@ import useStyles from './FormStyles';
 
 const Form = ({ currentId, setCurrentId }) => {
   const [foodPostData, setFoodPostData] = useState({
-    author: '',
     title: '',
     description: '',
     tags: '',
@@ -30,6 +29,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     if (foodPost) setFoodPostData(foodPost);
@@ -37,11 +37,12 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log(foodPostData);
     if (currentId) {
-      dispatch(updateFoodPost(currentId, foodPostData));
+      dispatch(updateFoodPost({ ...foodPostData, name: user?.newUser?.name }));
     } else {
       // rmb to call the function createFoodPost() and not createFoodPost
-      dispatch(createFoodPost(foodPostData));
+      dispatch(createFoodPost({ ...foodPostData, name: user?.newUser?.name }));
     }
     clearHandler();
     navigate('/');
@@ -49,13 +50,25 @@ const Form = ({ currentId, setCurrentId }) => {
   const clearHandler = () => {
     setCurrentId(null);
     setFoodPostData({
-      author: '',
       title: '',
       description: '',
       tags: '',
       selectedFile: '',
     });
   };
+
+  if (!user?.newUser?.name) {
+    return (
+      <Container maxWidth='md'>
+        <Paper className={classes.paper}>
+          <Typography variant='h6' align='center'>
+            Login or Register to create your very own food post and share your
+            own experiences!
+          </Typography>
+        </Paper>
+      </Container>
+    );
+  }
   return (
     <Grow in>
       <Container maxWidth='xs'>
@@ -69,17 +82,6 @@ const Form = ({ currentId, setCurrentId }) => {
             <Typography variant='h6' className={classes.formTitle}>
               {currentId ? 'Editing my' : 'Create a'} Food Post
             </Typography>
-            <Box sx={{ m: 3 }} />
-            <TextField
-              name='author'
-              variant='outlined'
-              label='Author'
-              fullWidth
-              value={foodPostData.author}
-              onChange={(e) =>
-                setFoodPostData({ ...foodPostData, author: e.target.value })
-              }
-            />
             <Box sx={{ m: 3 }} />
             <TextField
               name='title'
