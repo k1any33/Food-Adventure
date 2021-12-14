@@ -35,6 +35,12 @@ const Form = ({ currentId, setCurrentId }) => {
     if (foodPost) setFoodPostData(foodPost);
   }, [foodPost]);
 
+  useEffect(() => {
+    return () => {
+      setCurrentId(null);
+    };
+  }, [setCurrentId]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(foodPostData);

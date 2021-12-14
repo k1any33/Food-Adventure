@@ -4,13 +4,16 @@ const API = axios.create({ baseURL: 'http://localhost:5000' });
 
 // Send our token to the backend middelware to verify the user
 axios.interceptors.request.use((req) => {
-  const token = `Bearer ${JSON.parse(localStorage.getItem('user')).token}`;
-  req.headers.Authorization = token;
-
+  if (localStorage.getItem('user')) {
+    const token = `Bearer ${JSON.parse(localStorage.getItem('user')).token}`;
+    req.headers.Authorization = token;
+  }
   return req;
 });
 
 export const fetchFoodPosts = () => axios.get('/food-posts');
+export const fetchFoodPostsBySearch = (searchQuery) =>
+  axios.get(`/food-posts/search?searchQuery=${searchQuery.search || 'none'}`);
 export const createFoodPost = (newFoodPost) =>
   axios.post('/food-posts', newFoodPost);
 export const updateFoodPost = (id, updatedFoodPost) =>

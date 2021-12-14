@@ -4,7 +4,6 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     display: 'flex',
     flexDirection: 'row',
-
     alignItems: 'center',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
@@ -19,14 +18,18 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'Bold',
     fontSize: 23,
   },
-  link: {
-    textDecoration: 'none',
-    color: 'inherit',
-  },
   navBarRight: {
     margin: '5px 0',
     padding: '10px 30px',
     display: 'flex',
+  },
+  searchField: {
+    marginRight: '2px',
+    marginTop: '3px',
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'inherit',
   },
   icon: {
     fontSize: 30,

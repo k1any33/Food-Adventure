@@ -47,7 +47,7 @@ const FoodPost = ({ foodPost, setCurrentId }) => {
 
     return (
       <div className={classes.align}>
-        <FavoriteIcon fontSize='small' />
+        <FavoriteBorderIcon fontSize='small' />
         &nbsp;Like
       </div>
     );
@@ -71,7 +71,7 @@ const FoodPost = ({ foodPost, setCurrentId }) => {
           <Button
             className={classes.button}
             onClick={() => {
-              navigate('add-post');
+              navigate('/add-post');
               setCurrentId(foodPost._id);
             }}
           >

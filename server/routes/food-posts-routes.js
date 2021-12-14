@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   getFoodPosts,
+  getFoodPostsBySearch,
   createFoodPosts,
   updateFoodPost,
   deleteFoodPost,
@@ -12,6 +13,7 @@ import auth from '../middleware/auth.js';
 const router = express.Router();
 
 router.get('/', getFoodPosts);
+router.get('/search', getFoodPostsBySearch);
 router.post('/', auth, createFoodPosts);
 router.patch('/:id', auth, updateFoodPost);
 router.delete('/:id', auth, deleteFoodPost);

@@ -11,6 +11,19 @@ export const getFoodPosts = async (req, res) => {
   }
 };
 
+export const getFoodPostsBySearch = async (req, res) => {
+  const { searchQuery } = req.query;
+  try {
+    const title = new RegExp(searchQuery, 'i');
+
+    const foodPosts = await FoodPost.find({ title });
+
+    res.json({ data: foodPosts });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const createFoodPosts = async (req, res) => {
   const foodPost = req.body;
 
@@ -35,18 +48,20 @@ export const updateFoodPost = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send('No Food Post with that ID!');
 
-  const updatedFoodPost = {
-    author,
-    title,
-    description,
-    tags,
-    selectedFile,
-    _id: id,
-  };
-
-  await FoodPost.findByIdAndUpdate(id, updatedFoodPost, {
-    new: true,
-  });
+  const updatedFoodPost = await FoodPost.findByIdAndUpdate(
+    id,
+    {
+      author,
+      title,
+      description,
+      tags,
+      selectedFile,
+      _id: id,
+    },
+    {
+      new: true,
+    }
+  );
   res.json(updatedFoodPost);
 };
 

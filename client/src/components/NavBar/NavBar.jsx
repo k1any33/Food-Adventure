@@ -11,11 +11,10 @@ import {
   Avatar,
 } from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
-
 import useStyles from './NavBarStyles';
 import foodIcon from '../../assets/foodIcon.png';
+import Search from './Search';
 
 const NavBar = () => {
   const classes = useStyles();
@@ -47,10 +46,12 @@ const NavBar = () => {
       </div>
       {user ? (
         <div className={classes.navBarRight}>
+          <div className={classes.searchField}>
+            <Search />
+          </div>
           <Link to='/add-post' className={classes.link}>
             <AddIcon className={classes.icon} />
           </Link>
-          <SearchIcon className={classes.icon} />
           <FavoriteBorderIcon className={classes.icon} />
           <div className={classes.profile}>
             <Avatar alt={user.newUser.name} src={user.newUser.imageUrl}>
