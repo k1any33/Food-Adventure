@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
+    height: '80px',
   },
   title: {
     fontWeight: 'Bold',
@@ -36,8 +37,15 @@ const useStyles = makeStyles((theme) => ({
     margin: '5px 15px',
   },
   button: {
+    width: '100px',
+    height: '40px',
     justifyContent: 'center',
     margin: '0 40px',
+    backgroundColor: '#EC407A',
+    color: '#FFFFFF',
+    '&:hover': {
+      backgroundColor: '#EC407A',
+    },
   },
   profile: {
     display: 'flex',

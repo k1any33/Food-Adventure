@@ -45,7 +45,6 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(foodPostData);
     if (currentId) {
       dispatch(
         updateFoodPost(currentId, {

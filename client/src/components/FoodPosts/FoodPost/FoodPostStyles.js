@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 0,
   },
   favButton: {
-    color: 'black',
+    color: '#EC407A',
   },
   title: {
     padding: '10px 15px 0 15px',

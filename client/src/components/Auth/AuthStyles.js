@@ -19,6 +19,11 @@ export default makeStyles((theme) => ({
   },
   submitButton: {
     margin: theme.spacing(3, 0, 3),
+    backgroundColor: '#EC407A',
+    color: '#FFFFFF',
+    '&:hover': {
+      backgroundColor: '#EC407A',
+    },
   },
   paperButton: {
     textTransform: 'none',

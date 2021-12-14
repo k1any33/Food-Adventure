@@ -46,7 +46,7 @@ function App() {
           />
           <Route
             path='/auth'
-            element={!user ? <Auth /> : <Navigate to='/' />}
+            element={!user ? <Auth /> : <Navigate to='/food-posts' />}
           />
         </Routes>
       </MuiThemeProvider>

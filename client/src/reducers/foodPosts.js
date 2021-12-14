@@ -1,14 +1,20 @@
 import {
   CREATE,
   DELETE,
+  END_LOADING,
   FETCH_ALL,
   FETCH_BY_SEARCH,
   LIKE,
+  START_LOADING,
   UPDATE,
 } from '../constants/actionTypes';
 
-const foodPosts = (state = [], action) => {
+const foodPosts = (state = { isLoading: true, foodPosts: [] }, action) => {
   switch (action.type) {
+    case START_LOADING:
+      return { ...state, isLoading: true };
+    case END_LOADING:
+      return { ...state, isLoading: false };
     case FETCH_ALL:
       return {
         ...state,

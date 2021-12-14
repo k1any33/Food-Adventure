@@ -8,7 +8,6 @@ import {
   Button,
   Box,
 } from '@material-ui/core';
-// import { GoogleLogIn } from 'react-google-login';
 import useStyles from './AuthStyles';
 import AuthInput from './AuthInput';
 import { useDispatch } from 'react-redux';
@@ -32,7 +31,6 @@ const Auth = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(userData);
     if (isSignUp) {
       dispatch(register(userData, navigate));
     } else {
@@ -105,18 +103,6 @@ const Auth = () => {
             >
               {isSignUp ? 'Sign Up' : 'Log In'}
             </Button>
-            {/* <GoogleLogIn
-              clientId='GOOGLE ID'
-              render={(renderProps) => (
-                <Button
-                  fullWidth
-                  onClick={renderProps.onClick}
-                  variant='contained'
-                >
-                  Google Sign In
-                </Button>
-              )}
-            /> */}
           </Grid>
         </form>
         <Button className={classes.paperButton} onClick={switchAuthPage}>
