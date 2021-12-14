@@ -3,7 +3,7 @@ import axios from 'axios';
 const API = axios.create({ baseURL: 'http://localhost:5000' });
 
 // Send our token to the backend middelware to verify the user
-axios.interceptors.request.use((req) => {
+API.interceptors.request.use((req) => {
   if (localStorage.getItem('user')) {
     const token = `Bearer ${JSON.parse(localStorage.getItem('user')).token}`;
     req.headers.Authorization = token;
@@ -11,17 +11,17 @@ axios.interceptors.request.use((req) => {
   return req;
 });
 
-export const fetchFoodPosts = () => axios.get('/food-posts');
+export const fetchFoodPosts = (page) => API.get(`/food-posts?page=${page}`);
 export const fetchFoodPostsBySearch = (searchQuery) =>
-  axios.get(`/food-posts/search?searchQuery=${searchQuery.search || 'none'}`);
+  API.get(`/food-posts/search?searchQuery=${searchQuery.search || 'none'}`);
 export const createFoodPost = (newFoodPost) =>
-  axios.post('/food-posts', newFoodPost);
+  API.post('/food-posts', newFoodPost);
 export const updateFoodPost = (id, updatedFoodPost) =>
-  axios.patch(`/food-posts/${id}`, updatedFoodPost);
+  API.patch(`/food-posts/${id}`, updatedFoodPost);
 export const deleteFoodPost = (id) =>
-  axios.delete(`/food-posts/${id}`, deleteFoodPost);
+  API.delete(`/food-posts/${id}`, deleteFoodPost);
 export const likeFoodPost = (id) =>
-  axios.patch(`/food-posts/${id}/likeFoodPost`, likeFoodPost);
+  API.patch(`/food-posts/${id}/likeFoodPost`, likeFoodPost);
 
 export const login = (userData) => API.post('/user/login', userData);
 export const register = (userData) => API.post('/user/register', userData);

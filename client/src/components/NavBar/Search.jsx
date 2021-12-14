@@ -1,23 +1,17 @@
 import React, { useState } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import { InputBase } from '@material-ui/core';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { getFoodPostsBySearch } from '../../actions/foodPosts';
 import useStyles from './SearchStyles';
 
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
-
 const Search = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const query = useQuery();
-  // const page = query.get('page') || 1;
-  // const searchQuery = query.get('searchQuery');
+
   const [search, setSearch] = useState('');
 
   const enterButtonHandler = (e) => {

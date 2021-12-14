@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
-
-import { useDispatch } from 'react-redux';
-import { getFoodPosts } from './actions/foodPosts';
 
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home';
@@ -25,12 +22,8 @@ const theme = createTheme({
 
 function App() {
   const [currentId, setCurrentId] = useState(null);
-  const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem('user'));
 
-  useEffect(() => {
-    dispatch(getFoodPosts());
-  }, [dispatch, currentId]);
+  const user = JSON.parse(localStorage.getItem('user'));
 
   return (
     <BrowserRouter>

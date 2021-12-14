@@ -5,10 +5,10 @@ import { Grid } from '@material-ui/core';
 import FoodPost from './FoodPost/FoodPost';
 
 const FoodPosts = ({ setCurrentId }) => {
-  const foodPosts = useSelector((state) => state.foodPosts);
+  const { foodPosts } = useSelector((state) => state.foodPosts);
   console.log(foodPosts);
 
-  return !foodPosts.length ? (
+  return !foodPosts?.length ? (
     'There are no posts'
   ) : (
     <Grid

@@ -10,7 +10,7 @@ import {
   Button,
   Avatar,
 } from '@material-ui/core';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+// import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import AddIcon from '@material-ui/icons/Add';
 import useStyles from './NavBarStyles';
 import foodIcon from '../../assets/foodIcon.png';
@@ -52,16 +52,15 @@ const NavBar = () => {
           <Link to='/add-post' className={classes.link}>
             <AddIcon className={classes.icon} />
           </Link>
-          <FavoriteBorderIcon className={classes.icon} />
+          {/* <FavoriteBorderIcon className={classes.icon} /> */}
           <div className={classes.profile}>
             <Avatar alt={user.newUser.name} src={user.newUser.imageUrl}>
               {user.newUser.name.charAt(0)}
             </Avatar>
-            <Typography variant='h6' className={classes.name}>
+            {/* <Typography variant='h6' className={classes.name}>
               {user.newUser.name}
-            </Typography>
+            </Typography> */}
           </div>
-
           <Button
             onClick={logout}
             className={classes.button}

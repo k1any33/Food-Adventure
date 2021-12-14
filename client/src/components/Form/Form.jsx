@@ -24,7 +24,9 @@ const Form = ({ currentId, setCurrentId }) => {
     selectedFile: '',
   });
   const foodPost = useSelector((state) =>
-    currentId ? state.foodPosts.find((post) => post._id === currentId) : null
+    currentId
+      ? state.foodPosts.foodPosts.find((post) => post._id === currentId)
+      : null
   );
   const classes = useStyles();
   const dispatch = useDispatch();
