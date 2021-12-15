@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { LOGOUT } from '../../constants/actionTypes';
-import { useDispatch } from 'react-redux';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  Button,
-  Avatar,
-} from '@material-ui/core';
+import { AppBar, Avatar, Box, Button, Toolbar, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import useStyles from './NavBarStyles';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import foodIcon from '../../assets/foodIcon.png';
+import { LOGOUT } from '../../constants/actionTypes';
+import useStyles from './NavBarStyles';
 import Search from './Search';
 
 const NavBar = () => {
@@ -60,11 +53,7 @@ const NavBar = () => {
               {user.newUser.name}
             </Typography> */}
           </div>
-          <Button
-            onClick={logout}
-            className={classes.button}
-            variant='contained'
-          >
+          <Button onClick={logout} className={classes.button} variant='contained'>
             Log Out
           </Button>
         </div>

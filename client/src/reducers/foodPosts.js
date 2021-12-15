@@ -33,16 +33,12 @@ const foodPosts = (state = { isLoading: true, foodPosts: [] }, action) => {
     case LIKE:
       return {
         ...state,
-        foodPosts: state.foodPosts.map((foodPost) =>
-          foodPost._id === action.payload._id ? action.payload : foodPost
-        ),
+        foodPosts: state.foodPosts.map((foodPost) => (foodPost._id === action.payload._id ? action.payload : foodPost)),
       };
     case DELETE:
       return {
         ...state,
-        foodPosts: state.foodPosts.filter(
-          (foodPost) => foodPost._id !== action.payload
-        ),
+        foodPosts: state.foodPosts.filter((foodPost) => foodPost._id !== action.payload),
       };
     default:
       return state;

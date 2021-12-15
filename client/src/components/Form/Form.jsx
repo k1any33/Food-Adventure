@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {
-  TextField,
-  Button,
-  Paper,
-  Typography,
-  Grow,
-  Box,
-  Grid,
-  Container,
-} from '@material-ui/core';
+import { Box, Button, Container, Grid, Grow, Paper, TextField, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { createFoodPost, updateFoodPost } from '../../actions/foodPosts';
-
 import useStyles from './FormStyles';
 
 const Form = ({ currentId, setCurrentId }) => {
@@ -24,9 +14,7 @@ const Form = ({ currentId, setCurrentId }) => {
     selectedFile: '',
   });
   const foodPost = useSelector((state) =>
-    currentId
-      ? state.foodPosts.foodPosts.find((post) => post._id === currentId)
-      : null
+    currentId ? state.foodPosts.foodPosts.find((post) => post._id === currentId) : null
   );
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -74,8 +62,7 @@ const Form = ({ currentId, setCurrentId }) => {
       <Container maxWidth='md'>
         <Paper className={classes.paper}>
           <Typography variant='h6' align='center'>
-            Login or Register to create your very own food post and share your
-            own experiences!
+            Login or Register to create your very own food post and share your own experiences!
           </Typography>
         </Paper>
       </Container>
@@ -85,12 +72,7 @@ const Form = ({ currentId, setCurrentId }) => {
     <Grow in>
       <Container maxWidth='xs'>
         <Paper className={classes.paper}>
-          <form
-            classes={classes.form}
-            autoComplete='off'
-            noValidate
-            onSubmit={submitHandler}
-          >
+          <form classes={classes.form} autoComplete='off' noValidate onSubmit={submitHandler}>
             <Typography variant='h6' className={classes.formTitle}>
               {currentId ? 'Editing my' : 'Create a'} Food Post
             </Typography>
@@ -101,9 +83,7 @@ const Form = ({ currentId, setCurrentId }) => {
               label='Title'
               fullWidth
               value={foodPostData.title}
-              onChange={(e) =>
-                setFoodPostData({ ...foodPostData, title: e.target.value })
-              }
+              onChange={(e) => setFoodPostData({ ...foodPostData, title: e.target.value })}
             />
             <Box sx={{ m: 3 }} />
             <TextField
@@ -138,18 +118,11 @@ const Form = ({ currentId, setCurrentId }) => {
               <FileBase
                 type='file'
                 multiple={false}
-                onDone={({ base64 }) =>
-                  setFoodPostData({ ...foodPostData, selectedFile: base64 })
-                }
+                onDone={({ base64 }) => setFoodPostData({ ...foodPostData, selectedFile: base64 })}
               />
             </div>
             <Grid container justifyContent='flex-end'>
-              <Button
-                variant='contained'
-                color='secondary'
-                size='large'
-                type='submit'
-              >
+              <Button variant='contained' color='secondary' size='large' type='submit'>
                 Submit
               </Button>
             </Grid>

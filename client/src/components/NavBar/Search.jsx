@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import SearchIcon from '@material-ui/icons/Search';
 import { InputBase } from '@material-ui/core';
-import { useNavigate } from 'react-router-dom';
+import SearchIcon from '@material-ui/icons/Search';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
 import { getFoodPostsBySearch } from '../../actions/foodPosts';
 import useStyles from './SearchStyles';
 

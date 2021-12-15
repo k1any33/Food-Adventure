@@ -9,10 +9,7 @@ export const getFoodPosts = async (req, res) => {
     const startIndex = (Number(page) - 1) * LIMIT;
     const totalPages = await FoodPost.countDocuments({});
 
-    const foodPosts = await FoodPost.find()
-      .sort({ _id: -1 })
-      .limit(LIMIT)
-      .skip(startIndex);
+    const foodPosts = await FoodPost.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
     res.status(200).json({
       data: foodPosts,
       currentPage: Number(page),
@@ -57,8 +54,7 @@ export const createFoodPosts = async (req, res) => {
 export const updateFoodPost = async (req, res) => {
   const { id } = req.params;
   const { title, description, author, selectedFile, tags } = req.body;
-  if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send('No Food Post with that ID!');
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No Food Post with that ID!');
 
   const updatedFoodPost = await FoodPost.findByIdAndUpdate(
     id,
@@ -80,8 +76,7 @@ export const updateFoodPost = async (req, res) => {
 export const deleteFoodPost = async (req, res) => {
   const { id: _id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(_id))
-    return res.status(404).send('No Food Post with that ID!');
+  if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No Food Post with that ID!');
 
   await FoodPost.findByIdAndRemove(_id);
 
@@ -93,8 +88,7 @@ export const likeFoodPost = async (req, res) => {
 
   if (!req.userId) return res.json({ message: 'Unauthenticated' });
 
-  if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send('No Food Post with that ID!');
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No Food Post with that ID!');
 
   const foodPost = await FoodPost.findById(id);
 

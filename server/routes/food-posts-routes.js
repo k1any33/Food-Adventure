@@ -1,13 +1,12 @@
 import express from 'express';
 import {
+  createFoodPosts,
+  deleteFoodPost,
   getFoodPosts,
   getFoodPostsBySearch,
-  createFoodPosts,
-  updateFoodPost,
-  deleteFoodPost,
   likeFoodPost,
+  updateFoodPost,
 } from '../controllers/food-posts-controller.js';
-
 import auth from '../middleware/auth.js';
 
 const router = express.Router();
