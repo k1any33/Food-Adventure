@@ -1,17 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {
-  Container,
-  Paper,
-  Typography,
-  Grid,
-  Button,
-  Box,
-} from '@material-ui/core';
-import useStyles from './AuthStyles';
-import AuthInput from './AuthInput';
+import { Box, Button, Container, Grid, Paper, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { login, register } from '../../actions/auth';
+import AuthInput from './AuthInput';
+import useStyles from './AuthStyles';
 
 const initialState = {
   firstName: '',
@@ -28,6 +21,11 @@ const Auth = () => {
   const [userData, setUserData] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  useEffect(() => {
+    user ? navigate('/') : navigate('/auth');
+  }, [user, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -37,8 +35,7 @@ const Auth = () => {
       dispatch(login(userData, navigate));
     }
   };
-  const showPasswordHandler = () =>
-    setShowPassword((prevShowPassword) => !prevShowPassword);
+  const showPasswordHandler = () => setShowPassword((prevShowPassword) => !prevShowPassword);
   const valueChangeHandler = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
@@ -56,27 +53,13 @@ const Auth = () => {
           <Grid>
             {isSignUp && (
               <div>
-                <AuthInput
-                  name='firstName'
-                  label='First Name'
-                  autoFocus
-                  valueChangeHandler={valueChangeHandler}
-                />
+                <AuthInput name='firstName' label='First Name' autoFocus valueChangeHandler={valueChangeHandler} />
                 <Box sx={{ m: 3 }} />
-                <AuthInput
-                  name='lastName'
-                  label='Last Name'
-                  valueChangeHandler={valueChangeHandler}
-                />
+                <AuthInput name='lastName' label='Last Name' valueChangeHandler={valueChangeHandler} />
               </div>
             )}
             <Box sx={{ m: 3 }} />
-            <AuthInput
-              name='email'
-              label='Email Address'
-              type='email'
-              valueChangeHandler={valueChangeHandler}
-            />
+            <AuthInput name='email' label='Email Address' type='email' valueChangeHandler={valueChangeHandler} />
             <Box sx={{ m: 3 }} />
             <AuthInput
               name='password'
@@ -94,22 +77,14 @@ const Auth = () => {
                 valueChangeHandler={valueChangeHandler}
               />
             )}
-            <Button
-              className={classes.submitButton}
-              type='submit'
-              fullWidth
-              variant='contained'
-              color='secondary'
-            >
+            <Button className={classes.submitButton} type='submit' fullWidth variant='contained' color='secondary'>
               {isSignUp ? 'Sign Up' : 'Log In'}
             </Button>
           </Grid>
         </form>
         <Button className={classes.paperButton} onClick={switchAuthPage}>
           <Typography>
-            {isSignUp
-              ? 'Not on Food Adventure yet? Sign up'
-              : 'Already have an account? Sign in'}
+            {isSignUp ? 'Not on Food Adventure yet? Sign up' : 'Already have an account? Sign in'}
           </Typography>
         </Button>
       </Paper>

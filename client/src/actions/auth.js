@@ -4,7 +4,6 @@ import { AUTH } from '../constants/actionTypes';
 export const register = (userData, navigate) => async (dispatch) => {
   try {
     const { data } = await UserApi.register(userData);
-
     dispatch({ type: AUTH, data });
     navigate('/');
   } catch (error) {

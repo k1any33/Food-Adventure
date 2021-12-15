@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     borderRadius: '10px',
-    height: '100%',
+    height: '370px',
     position: 'relative',
   },
   cardMedia: {
