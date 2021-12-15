@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import FoodPost from '../models/foodPostModel.js';
 
-// Named exports
 export const getFoodPosts = async (req, res) => {
   const { page } = req.query;
   try {

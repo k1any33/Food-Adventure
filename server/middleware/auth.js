@@ -2,7 +2,8 @@ import jwt from 'jsonwebtoken';
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(' ')[1];
+    // const token = req.headers.authorization.split(' ')[1];
+    const [bearer, token] = req.headers.authorization.split(' ')
     const isCustomAuth = token.length < 500;
 
     if (!token) return res.status(401).send('Access Denied');

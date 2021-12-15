@@ -6,7 +6,7 @@ import {
   updateFoodPost,
   deleteFoodPost,
   likeFoodPost,
-} from '../controllers/food-posts-controller.js';
+} from '../services/food-posts-controller.js';
 
 import auth from '../middleware/auth.js';
 

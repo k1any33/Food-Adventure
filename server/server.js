@@ -1,27 +1,27 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import express from "express";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
 
-import foodPostRoutes from './routes/food-posts-routes.js';
-import userRoutes from './routes/user-routes.js';
+import foodPostRoutes from "./controllers/food-posts-routes.js";
+import userRoutes from "./controllers/user-routes.js";
 
 const app = express();
 dotenv.config();
 
 // app.use(express.json());
-app.use(bodyParser.json({ limit: '30mb', extended: true }));
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(cors());
-app.use('/food-posts', foodPostRoutes);
-app.use('/user', userRoutes);
+app.use("/food-posts", foodPostRoutes);
+app.use("/user", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(process.env.CONNECTION_URL, {
+  .connect("mongodb://localhost:27017/hello", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

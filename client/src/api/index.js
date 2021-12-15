@@ -11,6 +11,11 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+// imo, maybe it's possible to spread this out into several different classes
+// as you can see, this page will not scale well and if you have like 10 
+// sections, it becomes hundreds of lines
+// I would recommend putting each file into its own class, extending a 
+// base API class
 export const fetchFoodPosts = (page) => API.get(`/food-posts?page=${page}`);
 export const fetchFoodPostsBySearch = (searchQuery) =>
   API.get(`/food-posts/search?searchQuery=${searchQuery.search || 'none'}`);
