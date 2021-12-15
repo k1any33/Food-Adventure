@@ -4,8 +4,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 
-import foodPostRoutes from "./controllers/food-posts-routes.js";
-import userRoutes from "./controllers/user-routes.js";
+import foodPostRoutes from "./routes/food-posts-routes.js";
+import userRoutes from "./routes/user-routes.js";
 
 const app = express();
 dotenv.config();
