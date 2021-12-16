@@ -4,8 +4,10 @@
 
 ## Introduction 
 
-Food Adventure project is built using the MERN stack comprising of MongoDB, Express, React & NodeJS. 
-It is a simple social media application that allows users to post and share unique and mouth-watering treats that they have savored.
+Food Adventure project is built using the MERN stack comprising of MongoDB, Express, React & NodeJS.
+The frontend is designed using Material-UI which is a popular React UI framework.
+
+This project is a simple social media application that allows users to post and share unique and mouth-watering treats that they have savored.
 Users are able to view these posts, but may only add or like these posts upon authentication.
 
 Setup:
