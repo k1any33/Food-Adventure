@@ -1,0 +1,30 @@
+version: '3'
+services:
+  react-app: 
+    image: food-adventure-client
+    stdin_open: true
+    ports: 
+      - "3000:3000"
+    networks:
+      - food-adventure
+  api-server:
+    image: food-adventure-server
+    ports: 
+      - "5000:5000"
+    networks:
+      - food-adventure
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports: 
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+networks:
+  food-adventure: 
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
+
